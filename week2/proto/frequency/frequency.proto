@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package word_frequency;
+option go_package = "proto/frequency";
+import "google/api/annotations.proto";
+
+
+message inputRequest {
+  string text = 1;
+}
+message outputResponse {
+  map<string, int64> result = 1;
+}
+service WordFrequency{
+  rpc Calculate(inputRequest) returns (outputResponse) {
+    option (google.api.http) = {
+      post: "/v1/wordFrequency"
+      body: "*"
+    };
+  };
+}
+
